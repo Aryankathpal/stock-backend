@@ -8,5 +8,4 @@ import com.system.banking.models.Sales;
 
 @Repository
 public interface SalesRepository extends JpaRepository<Sales,Long>{
-
 }

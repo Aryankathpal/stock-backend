@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.system.banking.models.Sales;
 import com.system.banking.models.Stocks;
 import com.system.banking.repo.StockRepository;
 
@@ -46,5 +47,11 @@ public class StocksController {
 	@DeleteMapping("delete-item/{id}")
 	public void deleteItem(@PathVariable long id) {
 		repository.deleteById(id);
+	}
+	@PutMapping("/update/{Names}/{value}")
+	public void update(@PathVariable String Names,@PathVariable int value) {
+		Stocks order = repository.findByName(Names);
+		order.updateStocks(value);
+		repository.save(order);
 	}
 }

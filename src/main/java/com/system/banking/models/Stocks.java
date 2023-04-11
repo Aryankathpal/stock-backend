@@ -68,6 +68,9 @@ public class Stocks {
 	public void setStocks(int stocks) {
 		this.stocks = stocks;
 	}
+	public void updateStocks(int stocks) {
+		this.stocks+=stocks;
+	}
 	
 	
 }

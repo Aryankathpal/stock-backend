@@ -42,7 +42,6 @@ public class purchaseController {
 	}
 	@PutMapping("update-purchase/{id}")
 	public void updatePurchase(@PathVariable long id,@RequestBody Purchase purchase) {
-		System.out.print("hit");
 		repository.save(purchase);
 	}
 	@DeleteMapping("delete-purchase/{id}")

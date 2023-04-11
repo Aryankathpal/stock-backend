@@ -12,7 +12,7 @@ public class Sales {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long Id;
 	private String date;
-	private String name;
+	public String name;
 	private String invoice;
 	private String supplier;
 	private int quantity;

@@ -48,4 +48,5 @@ public class salesController {
 	public void deleteItem(@PathVariable long id) {
 		repository.deleteById(id);
 	}
+	
 }
