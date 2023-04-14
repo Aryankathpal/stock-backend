@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.system.banking.models.Purchase;
 import com.system.banking.models.Sales;
 import com.system.banking.models.Stocks;
 import com.system.banking.repo.StockRepository;
@@ -53,5 +54,33 @@ public class StocksController {
 		Stocks order = repository.findByName(Names);
 		order.updateStocks(value);
 		repository.save(order);
+	}
+	
+	@PutMapping("/update/create/{name}")
+	public void updateOrCreate(@RequestBody Purchase Body) {
+		try {
+			Stocks order = repository.findByName(Body.getName());
+			order.updateStocks(Body.getQuantity());
+			repository.save(order);
+		}
+		catch(Exception e) {
+			this.addItem(new Stocks(Body.getId(),Body.getName(),Body.getSupplier(),Body.getDate(),Body.getQuantity()));
+		}
+	}
+	@PutMapping("/update/create/sale/{name}")
+	public void updateOrCreate(@RequestBody Sales Body) {
+		System.out.println("called");
+		try {
+			Stocks order = repository.findByName(Body.getName());
+			int check = (Body.getQuantity()*-1)+order.getStocks();
+			System.out.println(check);
+			System.out.println(Body.getQuantity());
+			if(check<0)order.setStocks(0);
+			else order.updateStocks(Body.getQuantity()*-1);
+			repository.save(order);
+		}
+		catch(Exception e) {
+			this.addItem(new Stocks(Body.getId(),Body.getName(),Body.getSupplier(),Body.getDate(),0));
+		}
 	}
 }
